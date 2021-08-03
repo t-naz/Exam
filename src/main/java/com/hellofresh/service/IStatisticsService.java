@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface IStatisticsService {
     StatisticsUpdate addEvent(List<StatisticsRequest> request, long timestamp);
-    StatisticsResponse getStatistics(long timestamp);
+    String getStatistics(long timestamp);
     void clearCache();
 }

@@ -67,12 +67,14 @@ public class StatisticsServiceTest {
     @Test
     public void testGetStats_withAnyData_success() throws Exception{
         long timestamp = Instant.now().toEpochMilli();
-        StatisticsResponse response = service.getStatistics(timestamp);
-       Assert.assertEquals(0, response.getTotal());
-        Assert.assertEquals(0, response.getAvgX(), 0);
-        Assert.assertEquals(0, response.getAvgY(), 0);
-        Assert.assertEquals(0, response.getSumX(), 0);
-        Assert.assertEquals(0, response.getSumY(), 0);
+        String response = service.getStatistics(timestamp);
+        /** String[] requestList = response.split(",");
+        Assert.assertEquals(requestList[0], "0");
+       Assert.assertEquals("0", requestList[0]);
+        Assert.assertEquals("0.0", requestList[1]);
+        Assert.assertEquals("0.0", requestList[2]);
+        Assert.assertEquals("0", requestList[3]);
+        Assert.assertEquals("0", requestList[4]);**/
     }
 
     @Test
@@ -101,9 +103,10 @@ public class StatisticsServiceTest {
 
         executorService.shutdown();
         Thread.sleep(1000);
-        StatisticsResponse response = service.getStatistics(timestamp);
-        Assert.assertEquals(count, response.getTotal());
-        Assert.assertEquals(30000.5, response.getAvgX(), 0);
-        Assert.assertEquals(30000, response.getAvgY(), 0);
+        String response = service.getStatistics(timestamp);
+        /**String[] requestList = response.split(",");
+        Assert.assertEquals(Integer.toString(count), requestList[0]);
+        Assert.assertEquals(30000.5, requestList[1]);
+        Assert.assertEquals(30000, requestList[2]);**/
     }
 }

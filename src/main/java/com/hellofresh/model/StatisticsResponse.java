@@ -50,12 +50,6 @@ public class StatisticsResponse {
 
     @Override
     public String toString() {
-        return "StatisticsResponse{" +
-                "sumX=" + sumX +
-                ", avgX=" + avgX +
-                "sumY=" + sumY +
-                ", avgY=" + avgY +
-                ", total=" + total +
-                '}';
+        return  total+","+sumX+","+avgX+","+sumY+","+avgY;
     }
 }

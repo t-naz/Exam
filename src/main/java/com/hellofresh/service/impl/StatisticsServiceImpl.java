@@ -68,9 +68,9 @@ public class StatisticsServiceImpl implements IStatisticsService{
         return statisticsUpdate;
     }
 
-    public StatisticsResponse getStatistics(long timestamp) {
+    public String getStatistics(long timestamp) {
         Map<Long, Statistics> copy = cache.entrySet().parallelStream().collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().getStatistics()));
-        return getStatisticsFromCacheCopy(copy, timestamp);
+        return getStatisticsFromCacheCopy(copy, timestamp).toString();
     }
 
     private StatisticsResponse getStatisticsFromCacheCopy(Map<Long, Statistics> copy, long timestamp) {
@@ -104,7 +104,7 @@ public class StatisticsServiceImpl implements IStatisticsService{
             avgY = sumY / total;
         }
 
-        return StatisticsResponseBuilder.createStatisticsResponse().withSumX(sumX).withAvgX(avgX).withSumY(sumY).withAvgY(avgY).withTotal(total).build();
+        return StatisticsResponseBuilder.createStatisticsResponse().withTotal(total).withSumX(sumX).withAvgX(avgX).withSumY(sumY).withAvgY(avgY).build();
     }
 
     private Long getKeyFromTimestamp(Long timestamp) {
