@@ -6,7 +6,7 @@ public class StatisticsResponse {
     private double avgX;
     private long sumY;
     private long avgY;
-    private long count;
+    private long total;
 
     public double getSumX() {
         return sumX;
@@ -40,12 +40,12 @@ public class StatisticsResponse {
         this.avgY = avgY;
     }
 
-    public long getCount() {
-        return count;
+    public long getTotal() {
+        return total;
     }
 
-    public void setCount(long count) {
-        this.count = count;
+    public void setTotal(long total) {
+        this.total = total;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class StatisticsResponse {
                 ", avgX=" + avgX +
                 "sumY=" + sumY +
                 ", avgY=" + avgY +
-                ", count=" + count +
+                ", total=" + total +
                 '}';
     }
 }

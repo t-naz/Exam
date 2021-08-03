@@ -11,6 +11,7 @@ a closed period of time.
 * [Requirements](#requirements)
   * [Bonus Requirement](#bonus-requirement)
 * [Review Criteria](#review-criteria)
+* [Run Application](#To-run-application-use)
 
 ## `POST /event`
 
@@ -127,3 +128,11 @@ General criteria from most important to less important:
    are provided.
 1. Tests are show cased (no need to cover everything).
 1. Supporting notes on taken decisions and further clarifications are welcome.
+
+##To compile and build project run :
+
+mvn clean install
+
+##To run application use :
+
+mvn spring-boot:run

@@ -34,8 +34,8 @@ public class StatisticsResponseBuilder {
         return this;
     }
 
-    public StatisticsResponseBuilder withCount(long count){
-        response.setCount(count);
+    public StatisticsResponseBuilder withTotal(long total){
+        response.setTotal(total);
         return this;
     }
 

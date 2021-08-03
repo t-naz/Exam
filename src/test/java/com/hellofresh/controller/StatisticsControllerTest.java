@@ -75,7 +75,7 @@ public class StatisticsControllerTest {
         Assert.assertEquals(128250906, ((StatisticsResponse)response.getBody()).getAvgY());
         Assert.assertEquals(0.1105345936, ((StatisticsResponse)response.getBody()).getSumX(),0);
         Assert.assertEquals(256501812, ((StatisticsResponse)response.getBody()).getSumY());
-        Assert.assertEquals(2, ((StatisticsResponse)response.getBody()).getCount());
+        Assert.assertEquals(2, ((StatisticsResponse)response.getBody()).getTotal());
     }
 
     @Test
@@ -95,7 +95,7 @@ public class StatisticsControllerTest {
         Thread.sleep(1000);
         ResponseEntity response = controller.getStatistics();
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
-        Assert.assertEquals(count, ((StatisticsResponse)response.getBody()).getCount());
+        Assert.assertEquals(count, ((StatisticsResponse)response.getBody()).getTotal());
     }
 
     @Test
@@ -119,7 +119,7 @@ public class StatisticsControllerTest {
         Thread.sleep(1000);
         ResponseEntity response = controller.getStatistics();
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
-        Assert.assertEquals(count, ((StatisticsResponse)response.getBody()).getCount());
+        Assert.assertEquals(count, ((StatisticsResponse)response.getBody()).getTotal());
     }
 
     @Test
@@ -155,7 +155,7 @@ public class StatisticsControllerTest {
         Thread.sleep(1000);
         ResponseEntity response = controller.getStatistics();
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
-        Assert.assertEquals(count, ((StatisticsResponse)response.getBody()).getCount());
+        Assert.assertEquals(count, ((StatisticsResponse)response.getBody()).getTotal());
     }
 
 }

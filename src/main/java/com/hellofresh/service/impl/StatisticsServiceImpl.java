@@ -31,12 +31,12 @@ public class StatisticsServiceImpl implements IStatisticsService{
     public StatisticsUpdate addEvent(List<StatisticsRequest> requestList, long timestamp) {
         StatisticsUpdate statisticsUpdate = new StatisticsUpdate();
         boolean added = false;
-        int a =0;
+        int count =0;
         for(StatisticsRequest request: requestList){
             long requestTime = request.getTimestamp();
             long delay = timestamp - requestTime;
             if (delay < 0 || delay >= Constants.ONE_MINUTE_IN_MS) {
-                a++;
+                count++;
                 continue;
             } else {
                 added = true;
@@ -54,12 +54,12 @@ public class StatisticsServiceImpl implements IStatisticsService{
                 s.updateStatistics(request.getX(),request.getY());
             }
         }
-        if(a>0 && added){
+        if(count>0 && added){
             statisticsUpdate.setResponseEntity(HttpStatus.PARTIAL_CONTENT);
             statisticsUpdate.setAdded(added);
             return statisticsUpdate;
         }
-        else if(a>0){
+        else if(count>0){
             statisticsUpdate.setResponseEntity(HttpStatus.NO_CONTENT);
             return statisticsUpdate;
         }
@@ -79,7 +79,7 @@ public class StatisticsServiceImpl implements IStatisticsService{
         long sumY = 0;
         double avgX = 0;
         long avgY = 0;
-        long count = 0;
+        long total = 0;
         Long key = getKeyFromTimestamp(timestamp);
 
         for (Map.Entry<Long, Statistics> e : copy.entrySet()) {
@@ -87,24 +87,24 @@ public class StatisticsServiceImpl implements IStatisticsService{
             Long timeFrame = key - eKey;
             if(timeFrame >= 0 && timeFrame < cache.getCapacity()) {
                 Statistics eValue = e.getValue();
-                if(eValue.getCount() > 0) {
-                    count += eValue.getCount();
+                if(eValue.getTotal() > 0) {
+                    total += eValue.getTotal();
                     sumX += eValue.getSumX();
                     sumY += eValue.getSumY();
                 }
             }
         }
-        if(count == 0) {
+        if(total == 0) {
             avgX = 0;
             avgY = 0;
             sumX = 0;
             sumY = 0;
         } else {
-            avgX = sumX / count;
-            avgY = sumY / count;
+            avgX = sumX / total;
+            avgY = sumY / total;
         }
 
-        return StatisticsResponseBuilder.createStatisticsResponse().withSumX(sumX).withAvgX(avgX).withSumY(sumY).withAvgY(avgY).withCount(count).build();
+        return StatisticsResponseBuilder.createStatisticsResponse().withSumX(sumX).withAvgX(avgX).withSumY(sumY).withAvgY(avgY).withTotal(total).build();
     }
 
     private Long getKeyFromTimestamp(Long timestamp) {

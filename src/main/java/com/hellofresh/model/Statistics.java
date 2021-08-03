@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Statistics {
     private Lock lock = new ReentrantLock();
     private double sum = 0;
-    private long count = 0;
+    private long total = 0;
     private double sumX = 0;
     private double avgX = 0;
     private long sumY = 0;
@@ -17,7 +17,7 @@ public class Statistics {
 
     private Statistics(Statistics s) {
         this.sum = s.sum;
-        this.count = s.count;
+        this.total = s.total;
         this.avgX = s.avgX;
         this.sumX = s.sumX;
         this.avgY = s.avgY;
@@ -28,7 +28,7 @@ public class Statistics {
         try{
             lock.lock();
             sum += amount;
-            count++;
+            total++;
         }finally {
             lock.unlock();
         }
@@ -37,7 +37,7 @@ public class Statistics {
     public void updateStatistics(double x,long y) {
         try{
             lock.lock();
-            count++;
+            total++;
             sumX += x;
             sumY += y;
         }finally {
@@ -74,8 +74,8 @@ public class Statistics {
         return avgY;
     }
 
-    public long getCount() {
-        return count;
+    public long getTotal() {
+        return total;
     }
 
 }

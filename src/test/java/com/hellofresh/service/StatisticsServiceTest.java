@@ -68,7 +68,7 @@ public class StatisticsServiceTest {
     public void testGetStats_withAnyData_success() throws Exception{
         long timestamp = Instant.now().toEpochMilli();
         StatisticsResponse response = service.getStatistics(timestamp);
-       Assert.assertEquals(0, response.getCount());
+       Assert.assertEquals(0, response.getTotal());
         Assert.assertEquals(0, response.getAvgX(), 0);
         Assert.assertEquals(0, response.getAvgY(), 0);
         Assert.assertEquals(0, response.getSumX(), 0);
@@ -102,7 +102,7 @@ public class StatisticsServiceTest {
         executorService.shutdown();
         Thread.sleep(1000);
         StatisticsResponse response = service.getStatistics(timestamp);
-        Assert.assertEquals(count, response.getCount());
+        Assert.assertEquals(count, response.getTotal());
         Assert.assertEquals(30000.5, response.getAvgX(), 0);
         Assert.assertEquals(30000, response.getAvgY(), 0);
     }
